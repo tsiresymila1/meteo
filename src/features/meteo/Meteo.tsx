@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { KeyboardEvent, useState } from 'react';
 import { SpinnerCircular } from 'spinners-react';
 
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
@@ -15,6 +15,17 @@ export function Meteo() {
 
   const toCelcius = (value: any) => {
         return (value - 273.15).toFixed(2)
+  }
+  const getWeather = () => {
+      dispatch(getWeatherAsync(city)).finally(()=>{
+          setCity('')
+      })
+  }
+
+  const handleKeyDown = (event:KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+        getWeather()
+    }
   }
 
   
@@ -35,6 +46,7 @@ export function Meteo() {
         { status === 'idle' && weather && weather.weather && (
         <div>
             <ul className={styles.list}>
+                <li>Lieu : {weather.name} </li>
                 <li>Metéo : {weather.weather[0].main} : {weather.weather[0].description}</li>
                 <li>Temperature : {toCelcius(weather.main.temp_min)}°C à {toCelcius(weather.main.temp_max)}°C</li>
                 <li>Himidité : {weather.main.humidity}</li>
@@ -48,11 +60,12 @@ export function Meteo() {
           className={styles.textbox}
           aria-label="Set increment amount"
           value={city}
+          onKeyDown={handleKeyDown}
           onChange={(e) => setCity(e.target.value)}
         />
         <button
           className={styles.button}
-          onClick={() => dispatch(getWeatherAsync(city))}
+          onClick={getWeather}
         >
           Get Weather
         </button>

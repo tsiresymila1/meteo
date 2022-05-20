@@ -1,10 +1,8 @@
-import { AnyAction } from '@reduxjs/toolkit';
 import meteoReducer, {
     MeteoState,
-    getWeatherAsync
   } from './meteoSlice';
   
-  describe('counter reducer', () => {
+  describe('meteo reducer', () => {
     const initialState: MeteoState = {
       weather: undefined,
       status: 'idle',
