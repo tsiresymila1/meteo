@@ -37,3 +37,9 @@
     transform: translateY(0px);
   }
 }
+
+.error  {
+  display:flex;
+  color: rgb(177, 14, 14) !important;  
+  font-weight: 500;
+}
