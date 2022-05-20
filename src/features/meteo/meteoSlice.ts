@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { RootState } from '../../app/store';
 import { Meteo } from './meteo.types';
 import { fetchWeather } from './meteoAPI';
 
